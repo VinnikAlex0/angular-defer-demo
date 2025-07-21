@@ -1,0 +1,176 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "npm"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "before-defer": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/before-defer",
+      "sourceRoot": "projects/before-defer/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/before-defer/src/main.ts",
+            "tsConfig": "projects/before-defer/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/before-defer/public"
+              }
+            ],
+            "styles": [
+              "projects/before-defer/src/styles.css"
+            ],
+            "server": "projects/before-defer/src/main.server.ts",
+            "outputMode": "server",
+            "ssr": {
+              "entry": "projects/before-defer/src/server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "before-defer:build:production"
+            },
+            "development": {
+              "buildTarget": "before-defer:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/before-defer/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/before-defer/public"
+              }
+            ],
+            "styles": [
+              "projects/before-defer/src/styles.css"
+            ]
+          }
+        }
+      }
+    },
+    "after-defer": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/after-defer",
+      "sourceRoot": "projects/after-defer/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/after-defer/src/main.ts",
+            "tsConfig": "projects/after-defer/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/after-defer/public"
+              }
+            ],
+            "styles": [
+              "projects/after-defer/src/styles.css"
+            ],
+            "server": "projects/after-defer/src/main.server.ts",
+            "outputMode": "server",
+            "ssr": {
+              "entry": "projects/after-defer/src/server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "after-defer:build:production"
+            },
+            "development": {
+              "buildTarget": "after-defer:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/after-defer/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/after-defer/public"
+              }
+            ],
+            "styles": [
+              "projects/after-defer/src/styles.css"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
